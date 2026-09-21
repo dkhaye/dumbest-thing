@@ -10,6 +10,13 @@ MODE="${1:-all}" # "all" or "final"
 fail_count=0
 pass_count=0
 
+indent() {
+  local line
+  while IFS= read -r line; do
+    echo "      $line"
+  done
+}
+
 for lang_dir in "$ROOT"/*/; do
   lang="$(basename "$lang_dir")"
   case "$lang" in
@@ -34,7 +41,7 @@ for lang_dir in "$ROOT"/*/; do
 
     if [ $status -ne 0 ]; then
       echo "FAIL  $name (run.sh exited $status)"
-      echo "$actual" | sed 's/^/      /'
+      echo "$actual" | indent
       fail_count=$((fail_count + 1))
       continue
     fi
@@ -45,7 +52,7 @@ for lang_dir in "$ROOT"/*/; do
         pass_count=$((pass_count + 1))
       else
         echo "FAIL  $name (output != expected.txt)"
-        diff <(echo "$actual") "$expected" | sed 's/^/      /'
+        diff <(echo "$actual") "$expected" | indent
         fail_count=$((fail_count + 1))
       fi
     else

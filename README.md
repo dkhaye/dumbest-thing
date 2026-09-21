@@ -31,6 +31,12 @@ make final     # run only the shortlisted demos
 make capture   # produce asciinema .cast recordings + vhs renders for final/
 ```
 
+## CI
+
+- `.github/workflows/verify.yml` — runs `make verify` and `shellcheck` on every `run.sh`, on push to `main` and every PR.
+- `.github/workflows/lint-workflows.yml` — standalone actionlint check on any PR touching `.github/workflows/**`. Deliberately not wired into `verify.yml`, so a broken workflow file still gets caught even if `verify.yml` itself fails to parse.
+- Third-party actions are pinned to a full commit SHA with the version as a trailing comment (e.g. `actions/checkout@<sha> # v7.0.1`), not a semver tag or branch.
+
 ## Rules
 
 - Every candidate must be reproducible offline, from checked-in source only.

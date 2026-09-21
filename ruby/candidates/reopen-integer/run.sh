@@ -1,27 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Prefer a pinned rbenv 3.1.2 for local dev (this machine's system ruby is a
+# stale 2.6.10 shim). CI has no rbenv and puts a modern ruby on PATH via
+# ruby/setup-ruby, so fall back to that.
 RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
-RUBY_VERSION="3.1.2"
-RUBY_BIN="$RBENV_ROOT/versions/$RUBY_VERSION/bin/ruby"
+PINNED_RUBY="$RBENV_ROOT/versions/3.1.2/bin/ruby"
 
-if ! command -v rbenv >/dev/null 2>&1 && [ ! -x "$RUBY_BIN" ]; then
-  echo "error: rbenv not found and $RUBY_BIN does not exist. Install rbenv and 'rbenv install $RUBY_VERSION'." >&2
+if [ -x "$PINNED_RUBY" ]; then
+  RUBY_BIN="$PINNED_RUBY"
+elif command -v ruby >/dev/null 2>&1; then
+  RUBY_BIN="$(command -v ruby)"
+else
+  echo "error: no ruby found. Install rbenv + ruby 3.1.2, or install ruby and put it on PATH." >&2
   exit 1
 fi
-
-if [ ! -x "$RUBY_BIN" ]; then
-  echo "error: ruby $RUBY_VERSION not found at $RUBY_BIN. Run 'rbenv install $RUBY_VERSION'." >&2
-  exit 1
-fi
-
-actual_version="$("$RUBY_BIN" --version 2>&1)"
-case "$actual_version" in
-  ruby\ 3.1.2*) ;;
-  *)
-    echo "error: expected ruby 3.1.2 at $RUBY_BIN but got: $actual_version" >&2
-    exit 1
-    ;;
-esac
 
 "$RUBY_BIN" "$(dirname "${BASH_SOURCE[0]}")/demo.rb"
