@@ -1,0 +1,12 @@
+label    
+---------
+all rows:
+id  name 
+--  -----
+1   alice
+2   bob  
+3   carol
+4   dave 
+label               
+--------------------
+NOT IN (1, 2, NULL):

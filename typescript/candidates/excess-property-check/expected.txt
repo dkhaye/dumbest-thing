@@ -1,0 +1,5 @@
+=== error.ts ===
+candidates/excess-property-check/error.ts(9,13): error TS2561: Object literal may only specify known properties, but 'colour' does not exist in type '{ color?: string | undefined; width?: number | undefined; }'. Did you mean to write 'color'?
+exit: 2
+=== pass.ts ===
+exit: 0

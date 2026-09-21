@@ -1,0 +1,9 @@
+{
+  "name": "dumbest-thing-typescript",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Shared TypeScript tooling for the dumbest-thing TypeScript candidates. Not published.",
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

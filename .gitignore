@@ -1,0 +1,4 @@
+node_modules/
+captures/final/*.cast
+captures/final/*.gif
+captures/final/*.mp4
