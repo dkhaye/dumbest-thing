@@ -1,4 +1,5 @@
 node_modules/
+target/
 captures/final/*.cast
 captures/final/*.gif
 captures/final/*.mp4

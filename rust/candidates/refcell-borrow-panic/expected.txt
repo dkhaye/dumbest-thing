@@ -1,0 +1,5 @@
+writer sees 5
+
+thread 'main' (PID) panicked at src/main.rs:9:24:
+RefCell already mutably borrowed
+exit: 101
