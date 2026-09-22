@@ -1,5 +1,9 @@
 node_modules/
 target/
+.local/
+.terraform/
+*.tfstate
+*.tfstate.*
 captures/final/*.cast
 captures/final/*.gif
 captures/final/*.mp4
