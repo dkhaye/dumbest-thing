@@ -31,11 +31,10 @@ const DIM_CLR = "AAAAAA"; // grey — punctuation / filler
 const LANG_META: Record<string, LangMeta> = {
   javascript: {
     displayName: "JavaScript",
-    titleNotes:
-      "Alright, we'll start with a language that we're all familiar with, JavaScript",
+    titleNotes: "• familiar language, JS",
     videoNotes: [
-      "We'll do a basic cast from string to integer",
-      "Simple enough. But what if we wanted to cast more than one string\n\nWait. What happened?",
+      "• basic cast: string → int",
+      "• more strings? → wait, what happened?",
     ],
     explanation: [
       [
@@ -52,12 +51,35 @@ const LANG_META: Record<string, LangMeta> = {
       ],
     ],
     explanationNotes:
-      "• map callback signature: fn(currentValue, index, array)\n" +
-      "• parseInt(string, radix) — radix is the numeric base\n" +
-      "• So map silently passes the array index as the radix\n" +
-      "• index 0 → radix 0 (treated as base 10) → 1 ✓\n" +
-      "• index 1 → radix 1 (invalid, must be 0 or 2-36) → NaN\n" +
-      "• index 2 → radix 2 (base 2); \"3\" is not a binary digit → NaN",
+      "• map passes (value, index, array) — 3 args\n" +
+      "• parseInt(string, radix) — only reads 2\n" +
+      "• index leaks in as radix: 0=ok, 1=invalid, 2=base2",
+  },
+
+  sql: {
+    displayName: "SQL",
+    titleNotes: "• everyone's fave declarative language",
+    videoNotes: [
+      "• NOT IN — checking exclusion",
+      "• find all ICs → ???",
+    ],
+    explanation: [
+      [
+        { text: "id NOT IN (1, 2, ", color: DIM_CLR, mono: true },
+        { text: "NULL", color: ACCENT, bold: true, mono: true },
+        { text: ")", color: DIM_CLR, mono: true },
+      ],
+      [
+        { text: "x = NULL", color: DIM_CLR, mono: true },
+        { text: "  →  ", color: DIM_CLR, mono: true },
+        { text: "UNKNOWN", color: ACCENT, bold: true, mono: true },
+        { text: "  (not FALSE)", color: DIM_CLR, mono: true },
+      ],
+    ],
+    explanationNotes:
+      "• NULL = unknown (not zero, not empty)\n" +
+      "• NOT IN expands: x≠1 AND x≠2 AND x≠NULL\n" +
+      "• x≠NULL → UNKNOWN → WHERE never passes → zero rows",
   },
 };
 
@@ -186,8 +208,29 @@ for (const lang of langOrder) {
   exSlide.addNotes(meta.explanationNotes);
 }
 
+// Epilogue — corrected title
+const epilogue = pptx.addSlide();
+epilogue.background = { color: BG };
+epilogue.addText([
+  { text: "The Dumbest Thing You Can Do in ",
+    options: { color: FG,     bold: true, fontFace: "Helvetica Neue" } },
+  { text: "Every",
+    options: { color: FG,     bold: true, fontFace: "Helvetica Neue", strike: true } },
+  { text: " Seven",
+    options: { color: ACCENT, bold: true, fontFace: "Helvetica Neue" } },
+  { text: " Programming Language",
+    options: { color: FG,     bold: true, fontFace: "Helvetica Neue" } },
+  { text: "s",
+    options: { color: FG,     bold: true, fontFace: "Helvetica Neue" } },
+], {
+  x: 0, y: 0, w: "100%", h: "100%",
+  align: "center", valign: "middle",
+  fontSize: 72, shrinkText: true,
+});
+epilogue.addNotes("• callback to the title\n• it was seven, not every");
+
 // Write
-const slideCount = 1 + langOrder.filter((l) => LANG_META[l]).length * 2 + allVideos.length;
+const slideCount = 1 + langOrder.filter((l) => LANG_META[l]).length * 2 + allVideos.length + 1;
 pptx.writeFile({ fileName: outputFile }).then(() => {
   console.log(`built ${slideCount} slides → ${outputFile}`);
 });
