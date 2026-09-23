@@ -10,3 +10,6 @@ captures/final/*.mp4
 node_modules/
 target/
 videos/
+slides.pptx
+.last-capture
+package-lock.json
