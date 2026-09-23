@@ -1,6 +1,8 @@
 # mutable default argument
 
-**Status:** leading candidate, likely final slot
+**Status:** backup — displaced by `finally-swallows-exception` as the "real
+thing" beat (too famous a Python gotcha; part of the room will see the
+punchline coming). Still verified and kept as a fallback.
 
 ## Command
 
