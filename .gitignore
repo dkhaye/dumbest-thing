@@ -1,9 +1,10 @@
-node_modules/
-target/
-.local/
-.terraform/
 *.tfstate
 *.tfstate.*
+.claude/worktrees/*
+.local/
+.terraform/
 captures/final/*.cast
 captures/final/*.gif
 captures/final/*.mp4
+node_modules/
+target/
