@@ -81,6 +81,33 @@ const LANG_META: Record<string, LangMeta> = {
       "• NOT IN expands: x≠1 AND x≠2 AND x≠NULL\n" +
       "• x≠NULL → UNKNOWN → WHERE never passes → zero rows",
   },
+
+  php: {
+    displayName: "PHP",
+    titleNotes: "• PHP",
+    videoNotes: [
+      "• four assignments, four distinct-looking keys",
+      "• one slot",
+    ],
+    explanation: [
+      [
+        { text: "true",  color: ACCENT, bold: true, mono: true },
+        { text: "  →  1    ",          color: DIM_CLR, mono: true },
+        { text: "1.9",   color: ACCENT, bold: true, mono: true },
+        { text: "  →  1",             color: DIM_CLR, mono: true },
+      ],
+      [
+        { text: '"1"',   color: ACCENT, bold: true, mono: true },
+        { text: "  →  1    ",          color: DIM_CLR, mono: true },
+        { text: "1",     color: ACCENT, bold: true, mono: true },
+        { text: "  →  1",             color: DIM_CLR, mono: true },
+      ],
+    ],
+    explanationNotes:
+      "• PHP array keys are only integers or strings\n" +
+      "• bools, floats, numeric strings all cast to int\n" +
+      "• last write wins — four writes, one slot",
+  },
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -142,20 +169,48 @@ const BG = "000000";
 const FG = "FFFFFF";
 const MONO = "Courier New";
 
-// Intro slide
+// ─── Shared slide layout helpers ─────────────────────────────────────────────
+// Three-section title layout so intro and epilogue have identical structure.
+// Sections: top line (smaller, wraps), middle word (huge), bottom line (medium).
+const FONT = "Helvetica Neue";
+const titleSection = (
+  slide: PptxGenJS.Slide,
+  y: string, h: string, text: string | PptxGenJS.TextProps[],
+  fontSize: number,
+  color: string = FG
+) => {
+  const opts: PptxGenJS.TextPropsOptions = {
+    x: 0, y, w: "100%", h,
+    align: "center", valign: "middle",
+    color, bold: true, fontFace: FONT,
+    fontSize,
+  };
+  if (typeof text === "string") {
+    slide.addText(text, opts);
+  } else {
+    slide.addText(text, opts);
+  }
+};
+
+const titleFooter = (slide: PptxGenJS.Slide) =>
+  slide.addText("David Haye", {
+    x: 0, y: "88%", w: "100%", h: "10%",
+    align: "center", valign: "middle",
+    color: "888888", fontSize: 28, fontFace: FONT,
+  });
+
+// Intro slide — uniform title, no word emphasized.
+// Explicit \n breaks lock the 4-line layout so adding 's' on the epilogue
+// doesn't change the visual structure.
 const intro = pptx.addSlide();
 intro.background = { color: BG };
-intro.addText("The Dumbest Thing You Can Do in Every Programming Language", {
-  x: 0, y: 0, w: "100%", h: "85%",
-  align: "center", valign: "bottom",
-  color: FG, bold: true, fontFace: "Helvetica Neue",
-  fontSize: 120, shrinkText: true,
-});
-intro.addText("David Haye", {
-  x: 0, y: "88%", w: "100%", h: "10%",
+intro.addText("The Dumbest Thing You\nCan Do in Every\nProgramming\nLanguage", {
+  x: 0, y: 0, w: "100%", h: "86%",
   align: "center", valign: "middle",
-  color: "888888", fontSize: 28, fontFace: "Helvetica Neue",
+  color: FG, bold: true, fontFace: FONT,
+  fontSize: 80,
 });
+titleFooter(intro);
 intro.addNotes("[speaker notes]");
 
 // Language sections
@@ -208,25 +263,25 @@ for (const lang of langOrder) {
   exSlide.addNotes(meta.explanationNotes);
 }
 
-// Epilogue — corrected title
+// Epilogue — identical to intro except "Languages" and "Seven" overlay
 const epilogue = pptx.addSlide();
 epilogue.background = { color: BG };
-epilogue.addText([
-  { text: "The Dumbest Thing You Can Do in ",
-    options: { color: FG,     bold: true, fontFace: "Helvetica Neue" } },
-  { text: "Every",
-    options: { color: FG,     bold: true, fontFace: "Helvetica Neue", strike: true } },
-  { text: " Seven",
-    options: { color: ACCENT, bold: true, fontFace: "Helvetica Neue" } },
-  { text: " Programming Language",
-    options: { color: FG,     bold: true, fontFace: "Helvetica Neue" } },
-  { text: "s",
-    options: { color: FG,     bold: true, fontFace: "Helvetica Neue" } },
-], {
-  x: 0, y: 0, w: "100%", h: "100%",
+// Identical to intro with explicit breaks — only line 4 differs
+epilogue.addText("The Dumbest Thing You\nCan Do in Every\nProgramming\nLanguages", {
+  x: 0, y: 0, w: "100%", h: "86%",
   align: "center", valign: "middle",
-  fontSize: 72, shrinkText: true,
+  color: FG, bold: true, fontFace: FONT,
+  fontSize: 80,
 });
+// "Seven" overlaid where "Every" sits at the end of line 2.
+// With 4 lines at 80pt, line 2 center ≈ y=34%. Nudge if off.
+epilogue.addText("Seven", {
+  x: "56%", y: "25%", w: "30%", h: "18%",
+  align: "center", valign: "middle",
+  color: ACCENT, bold: true, fontFace: FONT,
+  fontSize: 80,
+});
+titleFooter(epilogue);
 epilogue.addNotes("• callback to the title\n• it was seven, not every");
 
 // Write

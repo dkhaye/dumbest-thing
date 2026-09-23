@@ -48,12 +48,17 @@ for beat_dir in "$ROOT"/*/final/*/; do
   (cd "$beat_dir" && asciinema rec --overwrite -c "bash run.sh" "$OUT/$lang-$beat.cast")
 
   if [ -f "$beat_dir/demo.tape" ]; then
-    (cd "$beat_dir" && vhs demo.tape)
-    echo "  rendered: $beat_dir/demo.mp4"
+    mp4="$beat_dir/demo.mp4"
+    if [ -f "$mp4" ] && [ "$mp4" -nt "$beat_dir/demo.tape" ]; then
+      echo "  up to date: $mp4"
+    else
+      (cd "$beat_dir" && vhs demo.tape)
+      echo "  rendered: $mp4"
+    fi
 
     lnum="$(lang_index "$lang")"
     dest="$VIDEOS/$lnum-$lang-$beat.mp4"
-    cp "$beat_dir/demo.mp4" "$dest"
+    cp "$mp4" "$dest"
     echo "  exported: $dest"
   else
     echo "  no demo.tape -- skipping vhs render"
