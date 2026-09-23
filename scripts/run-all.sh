@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Runs every candidate's run.sh (or, if --final, only final/run.sh) and diffs
-# its output against expected.txt. Exits nonzero if any candidate fails or
-# diverges from its recorded output.
+# Runs every candidate's run.sh (or, if "final", only final/<beat>/run.sh) and
+# diffs its output against expected.txt. Exits nonzero if any candidate fails
+# or diverges from its recorded output.
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -24,7 +24,7 @@ for lang_dir in "$ROOT"/*/; do
   esac
 
   if [ "$MODE" = "final" ]; then
-    dirs=("$lang_dir/final")
+    dirs=("$lang_dir"/final/*/)
   else
     dirs=("$lang_dir"/candidates/*/)
   fi

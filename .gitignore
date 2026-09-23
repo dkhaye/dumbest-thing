@@ -1,5 +1,6 @@
 *.tfstate
 *.tfstate.*
+*/final/*/demo.mp4
 .claude/worktrees/*
 .local/
 .terraform/
@@ -8,3 +9,4 @@ captures/final/*.gif
 captures/final/*.mp4
 node_modules/
 target/
+videos/
