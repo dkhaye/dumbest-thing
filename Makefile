@@ -1,4 +1,4 @@
-.PHONY: doctor verify final capture keynote
+.PHONY: doctor verify final capture keynote clean
 
 TAPES := $(shell find . -path "*/final/*/demo.tape" 2>/dev/null)
 
@@ -31,3 +31,10 @@ slides.pptx: .last-capture scripts/build-slides.ts package.json
 
 keynote: slides.pptx
 	@open slides.pptx
+
+# Remove all generated artifacts and force a full rebuild on next make keynote.
+clean:
+	@rm -f .last-capture slides.pptx
+	@rm -rf videos/ captures/final/
+	@find . -path "*/final/*/demo.mp4" -delete 2>/dev/null || true
+	@echo "cleaned"
