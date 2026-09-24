@@ -24,9 +24,10 @@ interface LangMeta {
   explanationNotes: string;
 }
 
-const ACCENT  = "FF5555"; // red  — the "oh no" colour
-const FN_CLR  = "8BE9FD"; // cyan — function names
-const DIM_CLR = "AAAAAA"; // grey — punctuation / filler
+const ACCENT   = "FF5555"; // red  — the "oh no" colour (explanation slides)
+const SEVEN_CLR = "CC0000"; // dark red — the SEVEN punchline overlay
+const FN_CLR   = "8BE9FD"; // cyan — function names
+const DIM_CLR  = "AAAAAA"; // grey — punctuation / filler
 
 const LANG_META: Record<string, LangMeta> = {
   javascript: {
@@ -191,9 +192,8 @@ const LANG_META: Record<string, LangMeta> = {
     displayName: "Terraform",
     titleNotes: "• Terraform",
     videoNotes: [
-      "• count-indexed resources — looks clean",
-      "• terraform plan after 'apply' — 0 changes",
-      "• remove first element → plan shows cascade",
+      "• type config, apply, state list — 3 servers",
+      "• remove alice → plan shows cascade",
     ],
     explanation: [
       [
@@ -304,17 +304,22 @@ const titleFooter = (slide: PptxGenJS.Slide) =>
     color: "888888", fontSize: 28, fontFace: FONT,
   });
 
-// Intro slide — uniform title, no word emphasized.
-// Explicit \n breaks lock the 4-line layout so adding 's' on the epilogue
-// doesn't change the visual structure.
+// Shared helper: builds the title text. EVERY is all-caps for emphasis;
+// colour stays white — the red reveal is SEVEN on the epilogue slide.
+const addTitleText = (slide: PptxGenJS.Slide) =>
+  slide.addText(
+    "The Dumbest Thing You\nCan Do in EVERY\nProgramming\nLanguage",
+    {
+      x: 0, y: 0, w: "100%", h: "86%",
+      align: "center", valign: "middle",
+      color: FG, bold: true, fontFace: FONT,
+      fontSize: 80,
+    }
+  );
+
 const intro = pptx.addSlide();
 intro.background = { color: BG };
-intro.addText("The Dumbest Thing You\nCan Do in Every\nProgramming\nLanguage", {
-  x: 0, y: 0, w: "100%", h: "86%",
-  align: "center", valign: "middle",
-  color: FG, bold: true, fontFace: FONT,
-  fontSize: 80,
-});
+addTitleText(intro);
 titleFooter(intro);
 intro.addNotes("[speaker notes]");
 
@@ -368,29 +373,38 @@ for (const lang of langOrder) {
   exSlide.addNotes(meta.explanationNotes);
 }
 
-// Epilogue — identical to intro except "Languages" and "Seven" overlay
-const epilogue = pptx.addSlide();
-epilogue.background = { color: BG };
-// Identical to intro with explicit breaks — only line 4 differs
-epilogue.addText("The Dumbest Thing You\nCan Do in Every\nProgramming\nLanguages", {
-  x: 0, y: 0, w: "100%", h: "86%",
-  align: "center", valign: "middle",
-  color: FG, bold: true, fontFace: FONT,
+// Epilogue slide 1: exact copy of intro — lets the audience sit with "EVERY"
+// before the reveal.
+const epilogue1 = pptx.addSlide();
+epilogue1.background = { color: BG };
+addTitleText(epilogue1);
+titleFooter(epilogue1);
+epilogue1.addNotes("• callback to the title");
+
+// Epilogue slide 2: same title + SEVEN overlaid over EVERY.
+// Position matches where "EVERY" sits on line 2 (y≈25%).
+const epilogue2 = pptx.addSlide();
+epilogue2.background = { color: BG };
+addTitleText(epilogue2);
+// Red "s" overlaid after "Language" on line 4.
+// Position is estimated from font metrics; tune x/y in Keynote if off.
+epilogue2.addText("s", {
+  x: "69%", y: "60%", w: "8%", h: "14%",
+  align: "left", valign: "top",
+  color: SEVEN_CLR, bold: true, fontFace: FONT,
   fontSize: 80,
 });
-// "Seven" overlaid where "Every" sits at the end of line 2.
-// With 4 lines at 80pt, line 2 center ≈ y=34%. Nudge if off.
-epilogue.addText("Seven", {
+epilogue2.addText("SEVEN", {
   x: "56%", y: "25%", w: "30%", h: "18%",
   align: "center", valign: "middle",
-  color: ACCENT, bold: true, fontFace: FONT,
+  color: SEVEN_CLR, bold: true, fontFace: FONT,
   fontSize: 80,
 });
-titleFooter(epilogue);
-epilogue.addNotes("• callback to the title\n• it was seven, not every");
+titleFooter(epilogue2);
+epilogue2.addNotes("• it was seven, not every");
 
 // Write
-const slideCount = 1 + langOrder.filter((l) => LANG_META[l]).length * 2 + allVideos.length + 1;
+const slideCount = 1 + langOrder.filter((l) => LANG_META[l]).length * 2 + allVideos.length + 2;
 pptx.writeFile({ fileName: outputFile }).then(() => {
   console.log(`built ${slideCount} slides → ${outputFile}`);
 });
