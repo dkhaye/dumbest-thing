@@ -29,6 +29,8 @@ Enter
 Sleep 800ms
 Show
 
-Type "SELECT name FROM employees WHERE id NOT IN (SELECT manager_id FROM employees);"
+Type "SELECT name FROM employees"
+Enter
+Type "WHERE id NOT IN (SELECT manager_id FROM employees);"
 Enter
 Sleep 3s

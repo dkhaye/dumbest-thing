@@ -7,20 +7,62 @@ Set Theme "IR_Black"
 Hide
 Type "export PS1='$ '"
 Enter
-Type "rm -rf /tmp/tf-demo-03 && bash setup-state.sh /tmp/tf-demo-03"
+Type "rm -rf /tmp/tf-demo && mkdir -p /tmp/tf-demo && cd /tmp/tf-demo"
 Enter
-Sleep 5s
-Type "cp main.tf /tmp/tf-demo-03/main.tf && cd /tmp/tf-demo-03"
-Enter
-Sleep 300ms
+Sleep 200ms
 Type "clear"
 Enter
 Sleep 300ms
+Type "cat > main.tf << 'HCL'"
+Enter
+Sleep 200ms
+Type "locals {"
+Enter
+Type '  names = ["alice", "bob", "charlie"]'
+Enter
+Type "}"
+Enter
+Enter
+Type 'resource "terraform_data" "server" {'
+Enter
+Type "  count = length(local.names)"
+Enter
+Type "  input = local.names[count.index]"
+Enter
+Type "}"
+Enter
+Type "HCL"
+Enter
+Sleep 300ms
+Type "terraform init -input=false > /dev/null 2>&1"
+Enter
+Sleep 4s
+Type "terraform apply -auto-approve -input=false > /dev/null 2>&1"
+Enter
+Sleep 10s
 Show
 
-Type "cat main.tf"
+Type "cat > main.tf << 'HCL'"
 Enter
-Sleep 1500ms
+Sleep 200ms
+Type "locals {"
+Enter
+Type '  names = ["bob", "charlie"]'
+Enter
+Type "}"
+Enter
+Enter
+Type 'resource "terraform_data" "server" {'
+Enter
+Type "  count = length(local.names)"
+Enter
+Type "  input = local.names[count.index]"
+Enter
+Type "}"
+Enter
+Type "HCL"
+Enter
+Sleep 800ms
 Type "terraform plan -input=false -no-color"
 Enter
 Sleep 5s
