@@ -106,6 +106,34 @@ const LANG_META: Record<string, LangMeta> = {
       "• the compiler approved it — the panic is a surprise",
   },
 
+  typescript: {
+    displayName: "TypeScript",
+    titleNotes: "• TypeScript",
+    videoNotes: [
+      "• fresh literal, extra property → error",
+      "• same object via variable → no error",
+    ],
+    explanation: [
+      [
+        { text: "getX", color: FN_CLR, bold: true, mono: true },
+        { text: "({ x:1, ",  color: DIM_CLR, mono: true },
+        { text: "y:2",       color: ACCENT,  bold: true, mono: true },
+        { text: " })  →  ",  color: DIM_CLR, mono: true },
+        { text: "error",     color: ACCENT,  bold: true, mono: true },
+      ],
+      [
+        { text: "const p = {…};  ", color: DIM_CLR, mono: true },
+        { text: "getX", color: FN_CLR, bold: true, mono: true },
+        { text: "(p)  →  ", color: DIM_CLR, mono: true },
+        { text: "1", color: FN_CLR, bold: true, mono: true },
+      ],
+    ],
+    explanationNotes:
+      "• fresh object literals are structurally checked at the call site\n" +
+      "• variables are widened — TypeScript forgets the extra property\n" +
+      "• same object, same data, different type treatment",
+  },
+
   sql: {
     displayName: "SQL",
     titleNotes: "• everyone's fave declarative language",
