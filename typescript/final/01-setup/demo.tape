@@ -2,7 +2,7 @@ Output demo.mp4
 Set FontSize 22
 Set Width 1280
 Set Height 720
-Set Theme "Dracula"
+Set Theme "IR_Black"
 
 Hide
 Type "export PS1='$ '"
@@ -10,6 +10,12 @@ Enter
 Type "source $HOME/.nvm/nvm.sh && nvm use default --silent 2>/dev/null || true"
 Enter
 Sleep 500ms
+Type "npm install --prefix ../.. --silent 2>/dev/null"
+Enter
+Sleep 5000ms
+Type "export PATH=\"$(cd ../.. && pwd)/node_modules/.bin:$PATH\""
+Enter
+Sleep 200ms
 Type "clear"
 Enter
 Sleep 300ms

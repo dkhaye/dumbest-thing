@@ -2,7 +2,7 @@ Output demo.mp4
 Set FontSize 22
 Set Width 1280
 Set Height 720
-Set Theme "Dracula"
+Set Theme "IR_Black"
 
 Hide
 Type "export PS1='$ '"
