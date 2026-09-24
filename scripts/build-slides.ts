@@ -131,6 +131,33 @@ const LANG_META: Record<string, LangMeta> = {
       "• bools, floats, numeric strings all cast to int\n" +
       "• last write wins — four writes, one slot",
   },
+
+  terraform: {
+    displayName: "Terraform",
+    titleNotes: "• Terraform",
+    videoNotes: [
+      "• count-indexed resources — looks clean",
+      "• terraform plan after 'apply' — 0 changes",
+      "• remove first element → plan shows cascade",
+    ],
+    explanation: [
+      [
+        { text: "count", color: FN_CLR, bold: true, mono: true },
+        { text: "[0] [1] [2]", color: DIM_CLR, mono: true },
+        { text: "  →  index = identity", color: DIM_CLR, mono: true },
+      ],
+      [
+        { text: "remove", color: ACCENT, bold: true, mono: true },
+        { text: " item[0]", color: DIM_CLR, mono: true },
+        { text: "  →  ", color: DIM_CLR, mono: true },
+        { text: "[1]→[0]", color: ACCENT, bold: true, mono: true },
+        { text: ", ", color: DIM_CLR, mono: true },
+        { text: "[2]→[1]", color: ACCENT, bold: true, mono: true },
+        { text: " — cascade", color: DIM_CLR, mono: true },
+      ],
+    ],
+    explanationNotes: "• count uses LIST INDEX as resource identity\n• remove item[0]: [1]→[0], [2]→[1] — Terraform sees 'updates'\n• use for_each (value-based identity) to fix this",
+  },
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
