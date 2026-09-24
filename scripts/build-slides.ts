@@ -79,6 +79,32 @@ const LANG_META: Record<string, LangMeta> = {
       "• no warning, no traceback — silent data loss",
   },
 
+  rust: {
+    displayName: "Rust",
+    titleNotes: "• Rust",
+    videoNotes: [
+      "• RefCell with overlapping borrows — compiles fine",
+      "• runtime panic: already borrowed",
+    ],
+    explanation: [
+      [
+        { text: "compile-time", color: "50FA7B", bold: true, mono: true },
+        { text: "  →  ", color: DIM_CLR, mono: true },
+        { text: "✓", color: "50FA7B", bold: true },
+        { text: "  (borrow checker approved)", color: DIM_CLR, mono: true },
+      ],
+      [
+        { text: "runtime", color: ACCENT, bold: true, mono: true },
+        { text: "      →  ", color: DIM_CLR, mono: true },
+        { text: "BorrowMutError", color: ACCENT, bold: true, mono: true },
+      ],
+    ],
+    explanationNotes:
+      "• RefCell defers borrow checking to runtime\n" +
+      "• borrow() + borrow_mut() while first borrow live → panic\n" +
+      "• the compiler approved it — the panic is a surprise",
+  },
+
   sql: {
     displayName: "SQL",
     titleNotes: "• everyone's fave declarative language",
