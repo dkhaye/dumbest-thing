@@ -56,6 +56,29 @@ const LANG_META: Record<string, LangMeta> = {
       "• index leaks in as radix: 0=ok, 1=invalid, 2=base2",
   },
 
+  python: {
+    displayName: "Python",
+    titleNotes: "• brew install python3\n• (no, actually...)",
+    videoNotes: [
+      "• exceptions propagate — expected",
+      "• return in finally → exception gone",
+    ],
+    explanation: [
+      [
+        { text: "finally", color: FN_CLR, bold: true, mono: true },
+        { text: ":  always runs — even with exception pending", color: DIM_CLR, mono: true },
+      ],
+      [
+        { text: "return", color: ACCENT, bold: true, mono: true },
+        { text: " in finally discards the pending exception", color: DIM_CLR, mono: true },
+      ],
+    ],
+    explanationNotes:
+      "• finally always runs, even when an exception is pending\n" +
+      "• return in finally discards the pending exception\n" +
+      "• no warning, no traceback — silent data loss",
+  },
+
   sql: {
     displayName: "SQL",
     titleNotes: "• everyone's fave declarative language",
