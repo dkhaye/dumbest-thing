@@ -7,10 +7,36 @@ Set Theme "Dracula"
 Hide
 Type "export PS1='$ '"
 Enter
+Type "export PYTHON_BASIC_REPL=1"
+Enter
+Type "export PYTHONWARNINGS=ignore::SyntaxWarning"
+Enter
 Type "clear"
 Enter
 Sleep 300ms
-Type "python3 -W ignore::SyntaxWarning"
+Type "brew install python3"
+Sleep 300ms
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Backspace
+Type "python3"
 Enter
 Sleep 1500ms
 Type "def loud():"

@@ -60,7 +60,8 @@ const LANG_META: Record<string, LangMeta> = {
     displayName: "Python",
     titleNotes: "• brew install python3\n• (no, actually...)",
     videoNotes: [
-      "• exceptions propagate — expected",
+      "• brew install python3 (no enter — joke lands)",
+      "• backspace → real demo: exceptions propagate",
       "• return in finally → exception gone",
     ],
     explanation: [
