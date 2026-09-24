@@ -37,9 +37,18 @@ Sleep 300ms
 Type "terraform init -input=false > /dev/null 2>&1"
 Enter
 Sleep 4s
+Type "clear"
+Enter
+Sleep 300ms
 Type "terraform apply -auto-approve -input=false > /dev/null 2>&1"
 Enter
 Sleep 10s
+Type "clear"
+Enter
+Sleep 300ms
+Type "terraform state list"
+Enter
+Sleep 1s
 Show
 
 Type "cat > main.tf << 'HCL'"

@@ -31,4 +31,7 @@ Type "}"
 Enter
 Type "RUST"
 Enter
-Sleep 2500ms
+Sleep 200ms
+Type "rustc /tmp/demo.rs -o /tmp/demo-rs"
+Enter
+Sleep 4s

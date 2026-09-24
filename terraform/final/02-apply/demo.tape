@@ -37,11 +37,17 @@ Sleep 300ms
 Type "terraform init -input=false > /dev/null 2>&1"
 Enter
 Sleep 4s
+Type "clear"
+Enter
+Sleep 300ms
 Show
 
 Type "terraform apply -auto-approve -input=false"
 Enter
 Sleep 8s
-Type "terraform plan -input=false -no-color"
+Type "clear"
 Enter
-Sleep 4s
+Sleep 300ms
+Type "terraform state list"
+Enter
+Sleep 2s
