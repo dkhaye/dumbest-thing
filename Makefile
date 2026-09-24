@@ -9,6 +9,7 @@ verify:
 	@bash scripts/run-all.sh all
 
 final:
+	@npm install --prefix typescript --silent
 	@bash scripts/run-all.sh final
 
 # Unconditional re-render — use when you want to force all videos to rebuild.
@@ -22,6 +23,7 @@ capture:
 # Make re-runs capture only when a tape is newer than the sentinel.
 
 .last-capture: $(TAPES)
+	@npm install --prefix typescript --silent
 	@bash scripts/capture-final.sh
 	@touch $@
 
