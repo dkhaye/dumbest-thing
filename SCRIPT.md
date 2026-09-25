@@ -157,6 +157,30 @@ Rename your list; Terraform rebuilds your infrastructure.
 
 ---
 
+## RUST
+
+**[Slide: Rust]**
+
+Rust is designed for memory safety.  It is intended to be 'correct by construction' at compile time.  But it's syntax can be a bit obtuse even to the most experienced of programmers.
+
+**[Video 01 - plays: writes the code]**
+
+Here, we've got a simple rust program where we define a vector, we borrow (or 'check out') the vector to read the data, and then we try to add a new value BEFORE the reader 'checks in' the vector data.  A big memory 'no-no' to write to something someone else has checked out.
+
+**[Video 02 - plays: compiles]**
+
+And rust is supposed to catch any memory errors at compile time, but this compiles fine.  OK. So let's run it.
+
+**[Video 03 - plays: punchline]**
+
+Panics.  Rust lost it's compile time memory safety.
+
+**[Slide: Explanation]**
+
+Rust does memory safety checks at compile time, except when you use RefCell.  RefCell is the programmers way of telling rust 'don't worry about memory safety, I've got this'.  But, clearly, I should have left the checking to the professionals.
+
+---
+
 ## PYTHON
 
 **[Slide: Python]**
