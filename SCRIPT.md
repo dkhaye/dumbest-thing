@@ -37,7 +37,7 @@ Well, it still got the first one right.
 
 **[Slide: Explanation]**
 
-Ok, so `map` is passing more than we bargained for.  It passes three things and `parseInt` and `parseInt` takes the first two, leaking index into the radix (or base, as in base-2, base-10)
+Ok, so `map` is passing more than we bargained for.  It passes three things and `parseInt` and `parseInt` takes the first two, leaking index into the radix.
 
 ---
 
@@ -63,7 +63,7 @@ TypeScript says that it's A-OK now.  Perfect.
 
 **[Slide: Explanation]**
 
-In TypeScript, fresh object literals get strict checking, but variables get "widened"; meaning that TypeScript forgets about the extra property.
+In TypeScript, fresh object literals get strict checking, but variables get "widened".
 
 Same object. Same data. Different answer depending on how you wrote it.
 
