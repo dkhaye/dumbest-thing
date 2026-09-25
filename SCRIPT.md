@@ -79,7 +79,7 @@ PHP powers something like 75% of the web. WordPress runs on PHP.
 
 Whether that's comforting or alarming, I'll leave to you.
 
-**[Video 01 — plays: four assignments with different-looking keys]**
+**[Video 01 — plays: four assignments with different keys]**
 
 I'm building a PHP array: a group of key and value pairs with four different keys.
 
