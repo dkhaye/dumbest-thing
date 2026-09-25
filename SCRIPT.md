@@ -19,11 +19,11 @@ Hello, I'm David Haye.  One of the core rules of "Lightning Talks" is that these
 
 **[Slide: JavaScript]**
 
-JavaScript runs in every web browser on earth. It's the reason websites do anything at all. It was also, famously, designed in ten days.
+JavaScript runs in every web browser on earth. It was also, famously, designed in ten days.
 
 **[Video 01 — plays: `["1"].map(parseInt)` → `[ 1 ]`]**
 
-So let's start with a simple data conversion.  We start with a string containing the 1 character and we cast it to the number 1.  Works perfectly. 
+So let's start with a simple data conversion, casting a string to an integer.  Works perfectly. 
 
 **[Video 02 — connector: `["1", "2", "3"].map(parseInt)` typed, cursor waiting]**
 
@@ -37,9 +37,7 @@ Well, it still got the first one right.
 
 **[Slide: Explanation]**
 
-Ok, so `map` is passing more into `parseInt` than we bargained for.  It passes three things to every function: the value, the index, and the array. `parseInt` reads two: the string, and the radix or *base* — as in base-10, base-2.
-
-The array index leaks in as the base. Index zero works. Index one — base-1 doesn't exist. Index two means base-2, and "3" isn't a valid binary number.
+Ok, so `map` is passing more than we bargained for.  It passes three things and `parseInt` and `parseInt` takes the first two, leaking index into the radix (or base, as in base-2, base-10)
 
 ---
 
@@ -47,11 +45,11 @@ The array index leaks in as the base. Index zero works. Index one — base-1 doe
 
 **[Slide: TypeScript]**
 
-Next we have JavaScript's big brother, TypeScript.  Typescript is basically JavaScript with a type-checker bolted on. Its entire purpose is to catch mistakes before your code runs.
+Next we have JavaScript's big brother, TypeScript.  Typescript is basically JavaScript with a type-checker bolted on.
 
 **[Video 01 — plays: `getX({ x: 1, y: 2 })` → type error]**
 
-So we start by defining a new Type and a Function that uses that Type.  And as expected, when I pass in an object with an extra property to it,  TypeScript catches it. Great. That's the whole pitch.
+So we start by defining a new Type and a Function that uses that Type.  Pass in a bad object and TypeScript throws an error.
 
 **[Video 02 — connector: `getX(p)` typed after `const p = { x: 1, y: 2 }`, cursor waiting]**
 
@@ -81,21 +79,21 @@ Whether that's comforting or alarming, I'll leave to you.
 
 **[Video 01 — plays: four assignments with different-looking keys]**
 
-I'm building a PHP array: a group of key and value pairs. I have four entries: `true`, `1`, `1.9`, and `"1"`. Four different keys.
+I'm building a PHP array: a group of key and value pairs with four different keys.
 
 **[Video 02 — connector: `print_r($a);` typed, cursor waiting]**
 
-So, I've stored all four values, let's take a look at what I've got.
+And now what have I stored?
 
 *[pause]*
 
 **[CLICK → Video 03 — punchline: `Array ( [1] => string )`]**
 
-One.
+Just one key value pair...
 
 **[Slide: Explanation]**
 
-PHP automatically converts array keys. Booleans become integers — true is 1. Floats truncate — 1.9 becomes 1, not 2. Strings that look like numbers become those numbers — "1" becomes 1. All four writes landed on the same key. Last write wins.
+PHP automatically converts array keys. Booleans, floats and strings all convert to int, so everybody writes to the same place. Last write wins.
 
 ---
 
@@ -107,25 +105,23 @@ SQL is everybody's favorite declarative language.  You don't tell it how to do i
 
 **[Video 01 — plays: employees table]**
 
-In this example, we start with a simple employee table with an id, a name, and the id of their manager.  
+In this example, we start with a simple employee table.  
 
 **[Video 02 — plays: `NOT IN (1, 2, 3)` → Dave, Eve]**
 
-And say we want to find every employee who is not a manager.  A quick glance at the manager_id column says the managers are ids 1, 2 and 3 and Dave and Eve are the ICs.  It checks out.
+And say we want to find every employee who is not a manager.  We'll use the known manager ids.
 
 **[Video 03 — connector: subquery version typed, cursor waiting]**
 
-Now what happens when we add new managers?  We have to keep our list of manager ids updated manually.  So instead of a hardcoded list, I'll replace it with a query that fetches the manager IDs from the table itself, and I should get the same answer.
+But that isn't scalable, so I'll replace it with a query that fetches the manager IDs from the table itself.
 
 **[CLICK → Video 04 — punchline: zero rows]**
 
-But I don't.
+But instead I get nothing.
 
 **[Slide: Explanation]**
 
-One employee, Alice, has no manager because she *is* the CEO. Her manager ID is `NULL`.
-
-And `NOT IN` expands to: *id ≠ 1 AND id ≠ 2 AND id ≠ NULL.* In SQL, comparing anything to `NULL` doesn't return false — it returns *unknown.* The WHERE clause can never be true.  Nobody is returned.
+In SQL, comparing anything to `NULL` doesn't return false — it returns *unknown.* The WHERE clause can never be true.  Nobody is returned.
 
 ---
 
@@ -133,17 +129,15 @@ And `NOT IN` expands to: *id ≠ 1 AND id ≠ 2 AND id ≠ NULL.* In SQL, compar
 
 **[Slide: Terraform]**
 
-Terraform is a DevOps tool; it lets you describe your infrastructure as code. Instead of clicking around in AWS console, you write a file that says: 
+Terraform is a DevOps tool; it lets you describe your infrastructure as code.
 
 **[Video 01 — plays: type config + `terraform apply` → Apply complete, 3 added]**
 
-"I want three servers, call them pluto, mars, and jupiter."  Then you apply and boom, three servers created, each with a unique id.
+Instead of clicking around in AWS console, you write a file that says: "I want three servers, call them pluto, mars, and jupiter."
 
 **[Video 02 — connector: edit `main.tf` to remove alice, type `terraform plan`, cursor waiting]**
 
-But on second thought, I only wanted my servers named after "real planets", so let's try again with just "mars and jupiter" and we'll see how `terraform` handles this.
-
-*[pause]*
+But what if I wanted my servers to be named after "real planets"?
 
 **[CLICK → Video 03 — punchline: plan shows 2 updates + 1 destroy]**
 
@@ -151,9 +145,7 @@ It wants to update two servers and destroy one.
 
 **[Slide: Explanation]**
 
-Terraform uses the *position* as identity, not the name. Remove position zero — pluto — and position one slides down. Terraform sees a new name at position zero: that's an update. Same for one. Position two no longer exists: that's a destroy.
-
-Rename your list; Terraform rebuilds your infrastructure.
+Terraform uses the *position* as identity, not the name. We cut out Pluto and the other planets crumble.
 
 ---
 
@@ -161,23 +153,23 @@ Rename your list; Terraform rebuilds your infrastructure.
 
 **[Slide: Rust]**
 
-Rust is designed for memory safety.  It is intended to be 'correct by construction' at compile time.  But it's syntax can be a bit obtuse even to the most experienced of programmers.
+Rust is designed for memory safety, checked at compile time.
 
 **[Video 01 - plays: writes the code]**
 
-Here, we've got a simple rust program where we define a vector, we borrow (or 'check out') the vector to read the data, and then we try to add a new value BEFORE the reader 'checks in' the vector data.  A big memory 'no-no' to write to something someone else has checked out.
+But what if we use RefCell to write a program where we borrow (or checkout out) the same memory address twice?
 
 **[Video 02 - plays: compiles]**
 
-And rust is supposed to catch any memory errors at compile time, but this compiles fine.  OK. So let's run it.
+This compiles fine.  OK. So let's run it.
 
 **[Video 03 - plays: punchline]**
 
-Panics.  Rust lost it's compile time memory safety.
+It panics.  Rust lost it's compile time memory safety.
 
 **[Slide: Explanation]**
 
-Rust does memory safety checks at compile time, except when you use RefCell.  RefCell is the programmers way of telling rust 'don't worry about memory safety, I've got this'.  But, clearly, I should have left the checking to the professionals.
+RefCell is the programmer's way of telling rust 'don't worry about memory safety, I've got this'.  But, clearly, I should have left the checking to the professionals.
 
 ---
 
@@ -185,19 +177,19 @@ Rust does memory safety checks at compile time, except when you use RefCell.  Re
 
 **[Slide: Python]**
 
-Python is what everyone learns to code with now. It's in data science, machine learning, automation — it's everywhere.  But every programmer knows that the absolute dumbest thing you can do in Python is:
+Python is what everyone learns to code with now. It's everywhere. But every programmer knows that the absolute dumbest thing you can do in Python is:
 
 **[Video 01 — plays: `brew install python3` typed, no Enter]**
 
-OK.  I kid.  I don't love python, but I know a lot of programmers do.
+OK.  I kid.
 
 **[Video 02 — plays: defines `reraise()`, calls it → exception propagates correctly]**
 
-So in `python`, we're going to look at exception handling.  Our `reraise` function raises an exception. It propagates up correctly. That's exactly how exceptions are supposed to work.
+We start with a `reraise` function that raises an exception.
 
 **[Video 03 — connector: defines `finally_return()` with `finally: return 2`, types `finally_return()`, cursor waiting]**
 
-`finally_return` also raises an exception.
+And then our `finally_return` function also raises an exception.
 
 *[pause]*
 
@@ -207,9 +199,7 @@ But the exception is gone.
 
 **[Slide: Explanation]**
 
-`finally` always runs — even with an exception in flight. `return` inside `finally` discards the pending exception on its way out.
-
-No warning. No traceback. Your error just doesn't happen.
+`finally` always runs — even with an exception in flight. No warning. No traceback. Your error just doesn't happen.
 
 ---
 
