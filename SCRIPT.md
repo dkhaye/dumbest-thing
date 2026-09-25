@@ -1,5 +1,5 @@
 # The Dumbest Thing You Can Do in Every Programming Language
-### Speaker Script — First Draft
+### Speaker Script
 
 ---
 
@@ -7,7 +7,9 @@
 
 **[Slide: Pre-Title]**
 
-Hello, I'm David Haye.  One of the core rules of "Lightning Talks" is that these talks are not supposed to be "Work Related".  So I'm hoping that you'll agree that I'm bending, but not breaking that rule by sharing with you 
+Hello, my name is David Haye.  
+
+One of the core rules of "Lightning Talks" is that these talks are not supposed to be "Work Related".  So I'm hoping that you'll agree that I'm bending, but not breaking that rule by sharing with you 
 
 **[Slide: Title]**
 
@@ -37,7 +39,7 @@ Well, it still got the first one right.
 
 **[Slide: Explanation]**
 
-Ok, so `map` is passing more than we bargained for.  It passes three things and `parseInt` and `parseInt` takes the first two, leaking index into the radix.
+Ok, so `map` is passing more than we bargained for.  It passes three things and `parseInt` takes the first two, leaking index into the radix.
 
 ---
 
@@ -214,5 +216,3 @@ The dumbest thing you can do in
 Seven Programming Languages
 
 ---
-
-*— Draft generated 2026-09-25 — edit heavily after test run —*
