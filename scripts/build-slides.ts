@@ -331,6 +331,19 @@ const addTitleText = (slide: PptxGenJS.Slide) =>
     }
   );
 
+// Joke slide: the deck's literal first slide is called "Title Slide" —
+// the bit before the bit. Same footer/layout style as the real intro below.
+const jokeTitle = pptx.addSlide();
+jokeTitle.background = { color: BG };
+jokeTitle.addText("Title Slide", {
+  x: 0, y: 0, w: "100%", h: "86%",
+  align: "center", valign: "middle",
+  color: FG, bold: true, fontFace: FONT,
+  fontSize: titleFontSize("Title Slide"),
+});
+titleFooter(jokeTitle);
+jokeTitle.addNotes("[speaker notes]");
+
 const intro = pptx.addSlide();
 intro.background = { color: BG };
 addTitleText(intro);
