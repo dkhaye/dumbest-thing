@@ -27,10 +27,12 @@ Sleep 1000ms
 Type "SELECT name FROM employees WHERE id NOT IN (1, 2, 3);"
 Enter
 Sleep 800ms
-Show
-
+Enter
+Sleep 500ms
 Type "SELECT name FROM employees"
 Enter
 Type "WHERE id NOT IN (SELECT manager_id FROM employees);"
+Show
+
 Enter
-Sleep 3s
+Sleep 3500ms

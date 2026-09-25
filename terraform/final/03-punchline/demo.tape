@@ -40,8 +40,6 @@ Sleep 500ms
 Type "terraform apply -auto-approve -input=false"
 Enter
 Sleep 8s
-Show
-
 Enter
 Sleep 500ms
 Type "cat > main.tf << 'HCL'"
@@ -66,4 +64,7 @@ Type "HCL"
 Enter
 Sleep 800ms
 Type "terraform plan -input=false"
-Sleep 2500ms
+Show
+
+Enter
+Sleep 8s

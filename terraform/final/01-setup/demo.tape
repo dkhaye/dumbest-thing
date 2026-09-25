@@ -42,6 +42,3 @@ Sleep 500ms
 Type "terraform apply -auto-approve -input=false"
 Enter
 Sleep 8s
-Type "terraform state list"
-Enter
-Sleep 2s

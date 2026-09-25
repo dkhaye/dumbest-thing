@@ -10,6 +10,16 @@ Enter
 Type "source $HOME/.nvm/nvm.sh && nvm use default --silent 2>/dev/null || true"
 Enter
 Sleep 500ms
+Type "cat > /tmp/npreview.js << 'JS'"
+Enter
+Type "require('repl').start({preview:false});"
+Enter
+Type "JS"
+Enter
+Sleep 200ms
+Type "export NODE_REPL_EXTERNAL_MODULE=/tmp/npreview.js"
+Enter
+Sleep 200ms
 Type "clear"
 Enter
 Sleep 300ms

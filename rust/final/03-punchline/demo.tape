@@ -33,8 +33,10 @@ Sleep 200ms
 Type "rustc /tmp/demo.rs -o /tmp/demo-rs"
 Enter
 Sleep 5s
+Enter
+Sleep 500ms
+Type "/tmp/demo-rs"
 Show
 
-Type "/tmp/demo-rs"
 Enter
-Sleep 3s
+Sleep 3500ms

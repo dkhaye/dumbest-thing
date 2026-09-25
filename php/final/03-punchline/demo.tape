@@ -22,8 +22,10 @@ Enter
 Type '$a["1"]   = "string";'
 Enter
 Sleep 800ms
+Enter
+Sleep 500ms
+Type 'print_r($a);'
 Show
 
-Type 'print_r($a);'
 Enter
-Sleep 2500ms
+Sleep 3000ms

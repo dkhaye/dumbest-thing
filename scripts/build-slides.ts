@@ -35,7 +35,8 @@ const LANG_META: Record<string, LangMeta> = {
     titleNotes: "• familiar language, JS",
     videoNotes: [
       "• basic cast: string → int",
-      "• more strings? → wait, what happened?",
+      "• more strings? → wait for it",
+      "• [click] → punchline",
     ],
     explanation: [
       [
@@ -63,7 +64,8 @@ const LANG_META: Record<string, LangMeta> = {
     videoNotes: [
       "• brew install python3 (no enter — joke lands)",
       "• backspace → real demo: exceptions propagate",
-      "• return in finally → exception gone",
+      "• return in finally — wait for it",
+      "• [click] → punchline",
     ],
     explanation: [
       [
@@ -81,30 +83,30 @@ const LANG_META: Record<string, LangMeta> = {
       "• no warning, no traceback — silent data loss",
   },
 
-  rust: {
-    displayName: "Rust",
-    titleNotes: "• Rust",
+  ruby: {
+    displayName: "Ruby",
+    titleNotes: "• Ruby",
     videoNotes: [
-      "• RefCell with overlapping borrows — compiles fine",
-      "• runtime panic: already borrowed",
+      "• reopen Integer, redefine +",
+      "• 1 + 1 — wait for it",
+      "• [click] → punchline",
     ],
     explanation: [
       [
-        { text: "compile-time", color: "50FA7B", bold: true, mono: true },
-        { text: "  →  ", color: DIM_CLR, mono: true },
-        { text: "✓", color: "50FA7B", bold: true },
-        { text: "  (borrow checker approved)", color: DIM_CLR, mono: true },
+        { text: "class Integer", color: DIM_CLR, mono: true },
+        { text: "  ← Ruby lets you reopen any class", color: DIM_CLR, mono: true },
       ],
       [
-        { text: "runtime", color: ACCENT, bold: true, mono: true },
-        { text: "      →  ", color: DIM_CLR, mono: true },
-        { text: "BorrowMutError", color: ACCENT, bold: true, mono: true },
+        { text: "  def +",   color: FN_CLR,  bold: true, mono: true },
+        { text: "(other)  →  ", color: DIM_CLR, mono: true },
+        { text: "42",        color: ACCENT,  bold: true, mono: true },
+        { text: "   # always", color: DIM_CLR, mono: true },
       ],
     ],
     explanationNotes:
-      "• RefCell defers borrow checking to runtime\n" +
-      "• borrow() + borrow_mut() while first borrow live → panic\n" +
-      "• the compiler approved it — the panic is a surprise",
+      "• Ruby lets you reopen any class, including built-ins\n" +
+      "• this redefines + for every integer in the process\n" +
+      "• 1 + 1 = 42. No warnings. No errors. Ships to prod.",
   },
 
   typescript: {
@@ -112,7 +114,8 @@ const LANG_META: Record<string, LangMeta> = {
     titleNotes: "• TypeScript",
     videoNotes: [
       "• fresh literal, extra property → error",
-      "• same object via variable → no error",
+      "• same object via variable — wait for it",
+      "• [click] → punchline",
     ],
     explanation: [
       [
@@ -140,7 +143,8 @@ const LANG_META: Record<string, LangMeta> = {
     titleNotes: "• everyone's fave declarative language",
     videoNotes: [
       "• NOT IN — checking exclusion",
-      "• find all ICs → ???",
+      "• find all ICs — wait for it",
+      "• [click] → punchline",
     ],
     explanation: [
       [
@@ -166,7 +170,8 @@ const LANG_META: Record<string, LangMeta> = {
     titleNotes: "• PHP",
     videoNotes: [
       "• four assignments, four distinct-looking keys",
-      "• one slot",
+      "• print_r — wait for it",
+      "• [click] → punchline",
     ],
     explanation: [
       [
@@ -192,8 +197,9 @@ const LANG_META: Record<string, LangMeta> = {
     displayName: "Terraform",
     titleNotes: "• Terraform",
     videoNotes: [
-      "• type config, apply, state list — 3 servers",
-      "• remove alice → plan shows cascade",
+      "• type config, terraform apply",
+      "• remove alice — wait for it",
+      "• [click] → plan shows cascade",
     ],
     explanation: [
       [
@@ -327,13 +333,7 @@ intro.addNotes("[speaker notes]");
 for (const lang of langOrder) {
   const meta = LANG_META[lang];
   if (!meta) {
-    console.warn(`warning: no metadata for language "${lang}" — skipping title + explanation slides`);
-    // Still add the videos even without metadata
-    for (const filename of videosByLang[lang]) {
-      const slide = pptx.addSlide();
-      slide.background = { color: BG };
-      slide.addMedia({ type: "video", path: path.join(videosDir, filename), x: 0, y: 0, w: "100%", h: "100%" });
-    }
+    console.warn(`warning: no metadata for language "${lang}" — excluded from deck`);
     continue;
   }
 

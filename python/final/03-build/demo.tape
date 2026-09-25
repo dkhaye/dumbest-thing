@@ -56,6 +56,8 @@ Enter
 Sleep 800ms
 Show
 
+Enter
+Sleep 500ms
 Type "def silent():"
 Enter
 Type "    try:"
@@ -69,5 +71,4 @@ Enter
 Enter
 Sleep 500ms
 Type "silent()"
-Enter
 Sleep 2500ms

@@ -10,26 +10,28 @@ Enter
 Type "source $HOME/.nvm/nvm.sh && nvm use default --silent 2>/dev/null || true"
 Enter
 Sleep 500ms
+Type "cat > /tmp/npreview.js << 'JS'"
+Enter
+Type "require('repl').start({preview:false});"
+Enter
+Type "JS"
+Enter
+Sleep 200ms
+Type "export NODE_REPL_EXTERNAL_MODULE=/tmp/npreview.js"
+Enter
+Sleep 200ms
 Type "clear"
 Enter
 Sleep 300ms
-Type "npx ts-node"
+Type "node"
 Enter
 Sleep 1500ms
-Type "type Point = { x: number }"
-Enter
-Sleep 500ms
-Type "function getX(p: Point) { return p.x }"
-Enter
-Sleep 500ms
-Type "getX({ x: 1, y: 2 })"
+Type '["1"].map(parseInt)'
 Enter
 Sleep 800ms
 Show
 
-Type "const p = { x: 1, y: 2 }"
 Enter
 Sleep 500ms
-Type "getX(p)"
-Enter
-Sleep 2s
+Type '["1", "2", "3"].map(parseInt)'
+Sleep 2500ms
