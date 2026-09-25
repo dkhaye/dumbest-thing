@@ -20,9 +20,8 @@ interface LangMeta {
   displayName: string;
   titleNotes: string;
   videoNotes: string[];       // one entry per video beat, in order
-  explanation: TextRun[][];   // one inner array per line — colored code annotation
-  explanationDetail: string;  // plain-prose mechanism + consequence, read by the audience
-  explanationNotes: string;   // spoken headline — the slide carries the rest
+  explanation: TextRun[][];   // one inner array per line
+  explanationNotes: string;
 }
 
 const ACCENT   = "FF5555"; // red  — the "oh no" colour (explanation slides)
@@ -56,11 +55,12 @@ const LANG_META: Record<string, LangMeta> = {
         { text: ")",       color: DIM_CLR, mono: true },
       ],
     ],
-    explanationDetail:
-      "map calls fn(value, index, array) — 3 args. parseInt only wants " +
-      "(string, radix). The index leaks in as the radix: base-1 doesn't " +
-      "exist, and \"3\" isn't valid in base-2.",
-    explanationNotes: "The array index leaks in as parseInt's radix argument.",
+    explanationNotes:
+      "Ok, so map is passing more into parseInt than we bargained for. It passes " +
+      "three things to every function: the value, the index, and the array. " +
+      "parseInt reads two: the string, and the radix or base — as in base-10, base-2.\n\n" +
+      "The array index leaks in as the base. Index zero works. Index one — base-1 " +
+      "doesn't exist. Index two means base-2, and \"3\" isn't a valid binary number.",
   },
 
   python: {
@@ -87,11 +87,10 @@ const LANG_META: Record<string, LangMeta> = {
         { text: " in finally discards the pending exception", color: DIM_CLR, mono: true },
       ],
     ],
-    explanationDetail:
-      "finally always runs, even with an exception in flight. A return " +
-      "inside it discards that exception on the way out — no warning, no " +
-      "traceback.",
-    explanationNotes: "return in finally discards the exception. No warning, no traceback.",
+    explanationNotes:
+      "finally always runs — even with an exception in flight. return inside " +
+      "finally discards the pending exception on its way out.\n\n" +
+      "No warning. No traceback. Your error just doesn't happen.",
   },
 
   rust: {
@@ -122,11 +121,11 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "BorrowMutError", color: ACCENT, bold: true, mono: true },
       ],
     ],
-    explanationDetail:
-      "RefCell moves borrow-checking from compile time to runtime — the " +
-      "programmer tells Rust 'don't worry, I've got this,' and the compiler " +
-      "steps back.",
-    explanationNotes: "RefCell defers the borrow check from compile time to runtime.",
+    explanationNotes:
+      "Rust does memory safety checks at compile time, except when you use " +
+      "RefCell. RefCell is the programmers way of telling rust 'don't worry " +
+      "about memory safety, I've got this'. But, clearly, I should have left " +
+      "the checking to the professionals.",
   },
 
   typescript: {
@@ -158,11 +157,11 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "1", color: FN_CLR, bold: true, mono: true },
       ],
     ],
-    explanationDetail:
-      "Fresh object literals get strict excess-property checking. Variables " +
-      "get \"widened\" — TypeScript forgets the extra property once it's " +
-      "stored.",
-    explanationNotes: "Fresh literals get checked strictly; variables get widened.",
+    explanationNotes:
+      "In TypeScript, fresh object literals get strict checking, but " +
+      "variables get \"widened\"; meaning that TypeScript forgets about the " +
+      "extra property.\n\n" +
+      "Same object. Same data. Different answer depending on how you wrote it.",
   },
 
   sql: {
@@ -198,11 +197,12 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "  (not FALSE)", color: DIM_CLR, mono: true },
       ],
     ],
-    explanationDetail:
-      "Alice (the CEO) has manager_id = NULL. NOT IN expands to id≠1 AND " +
-      "id≠2 AND id≠NULL — and anything compared to NULL is UNKNOWN, not " +
-      "false. WHERE can never be true. Zero rows.",
-    explanationNotes: "One NULL in the subquery poisons the whole NOT IN.",
+    explanationNotes:
+      "One employee, Alice, has no manager because she is the CEO. Her " +
+      "manager ID is NULL.\n\n" +
+      "And NOT IN expands to: id ≠ 1 AND id ≠ 2 AND id ≠ NULL. In SQL, " +
+      "comparing anything to NULL doesn't return false — it returns unknown. " +
+      "The WHERE clause can never be true. Nobody is returned.",
   },
 
   php: {
@@ -231,10 +231,11 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "  →  1",             color: DIM_CLR, mono: true },
       ],
     ],
-    explanationDetail:
-      "PHP casts array keys: bools and floats become ints, numeric strings " +
-      "become numbers. All four keys land on 1 — last write wins.",
-    explanationNotes: "PHP casts every one of those keys down to the same int.",
+    explanationNotes:
+      "PHP automatically converts array keys. Booleans become integers — " +
+      "true is 1. Floats truncate — 1.9 becomes 1, not 2. Strings that look " +
+      "like numbers become those numbers — \"1\" becomes 1. All four writes " +
+      "landed on the same key. Last write wins.",
   },
 
   terraform: {
@@ -267,11 +268,12 @@ const LANG_META: Record<string, LangMeta> = {
         { text: " — cascade", color: DIM_CLR, mono: true },
       ],
     ],
-    explanationDetail:
-      "count uses list position as identity, not the name. Remove index 0 " +
-      "and everything after it slides down — Terraform reads that as " +
-      "updates, and the vacated last slot as a destroy.",
-    explanationNotes: "count treats list position as identity, not the name.",
+    explanationNotes:
+      "Terraform uses the position as identity, not the name. Remove " +
+      "position zero — pluto — and position one slides down. Terraform " +
+      "sees a new name at position zero: that's an update. Same for one. " +
+      "Position two no longer exists: that's a destroy.\n\n" +
+      "Rename your list; Terraform rebuilds your infrastructure.",
   },
 };
 
@@ -428,34 +430,20 @@ for (const lang of langOrder) {
     slide.addNotes(meta.videoNotes[i] ?? "[speaker notes]");
   }
 
-  // Explanation slide: code annotation on top (unchanged), a plain-prose
-  // detail block below it so the audience can read the "full" mechanism
-  // while the speaker only says the one-line headline (see explanationNotes).
+  // Explanation slide
   const exSlide = pptx.addSlide();
   exSlide.background = { color: BG };
   for (const [i, lineRuns] of meta.explanation.entries()) {
     exSlide.addText(runsToTextProps(lineRuns), {
       x: "5%",
-      y: `${8 + i * 16}%`,
+      y: `${30 + i * 28}%`,
       w: "90%",
-      h: "14%",
+      h: "24%",
       align: "left",
       valign: "middle",
-      fontSize: 32,
+      fontSize: 36,
     });
   }
-  exSlide.addText(meta.explanationDetail, {
-    x: "5%",
-    y: "45%",
-    w: "90%",
-    h: "45%",
-    align: "left",
-    valign: "top",
-    color: FG,
-    fontFace: FONT,
-    fontSize: 22,
-    lineSpacingMultiple: 1.3,
-  });
   exSlide.addNotes(meta.explanationNotes);
 }
 
