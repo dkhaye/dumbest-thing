@@ -151,30 +151,6 @@ Terraform uses the *position* as identity, not the name. We cut out Pluto and th
 
 ---
 
-## RUST
-
-**[Slide: Rust]**
-
-Rust is designed for memory safety, checked at compile time.
-
-**[Video 01 - plays: writes the code]**
-
-But what if we use RefCell to write a program where we borrow (or checkout out) the same memory address twice?
-
-**[Video 02 - plays: compiles]**
-
-This compiles fine.  OK. So let's run it.
-
-**[Video 03 - plays: punchline]**
-
-It panics.  Rust lost it's compile time memory safety.
-
-**[Slide: Explanation]**
-
-RefCell is the programmer's way of telling rust 'don't worry about memory safety, I've got this'.  But, clearly, I should have left the checking to the professionals.
-
----
-
 ## PYTHON
 
 **[Slide: Python]**
@@ -211,8 +187,8 @@ But the exception is gone.
 
 The dumbest thing you can do in 
 
-**[CLICK → SEVEN overlaid on EVERY, red `s` on Language]**
+**[CLICK → SIX overlaid on EVERY, red `s` on Language]**
 
-Seven Programming Languages
+Six Programming Languages
 
 ---

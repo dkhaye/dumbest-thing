@@ -25,21 +25,18 @@ interface LangMeta {
 }
 
 const ACCENT   = "FF5555"; // red  — the "oh no" colour (explanation slides)
-const SEVEN_CLR = "CC0000"; // dark red — the SEVEN punchline overlay
+const SIX_CLR = "CC0000"; // dark red — the SIX punchline overlay
 const FN_CLR   = "8BE9FD"; // cyan — function names
 const DIM_CLR  = "AAAAAA"; // grey — punctuation / filler
 
 const LANG_META: Record<string, LangMeta> = {
   javascript: {
     displayName: "JavaScript",
-    titleNotes:
-      "JavaScript runs in every web browser on earth. It's the reason " +
-      "websites do anything at all. It was also, famously, designed in ten days.",
+    titleNotes: "• every browser · designed in 10 days",
     videoNotes: [
-      "So let's start with a simple data conversion. We start with a string " +
-        "containing the 1 character and we cast it to the number 1. Works perfectly.",
-      "Now let's try three.\n[pause — let the audience read the command]",
-      "Well, it still got the first one right.",
+      "• cast string \"1\" → int, works fine",
+      "• try three · [pause]",
+      "• first one still right",
     ],
     explanation: [
       [
@@ -55,27 +52,17 @@ const LANG_META: Record<string, LangMeta> = {
         { text: ")",       color: DIM_CLR, mono: true },
       ],
     ],
-    explanationNotes:
-      "Ok, so map is passing more into parseInt than we bargained for. It passes " +
-      "three things to every function: the value, the index, and the array. " +
-      "parseInt reads two: the string, and the radix or base — as in base-10, base-2.\n\n" +
-      "The array index leaks in as the base. Index zero works. Index one — base-1 " +
-      "doesn't exist. Index two means base-2, and \"3\" isn't a valid binary number.",
+    explanationNotes: "• map passes 3 args, parseInt takes 2 · index leaks into radix",
   },
 
   python: {
     displayName: "Python",
-    titleNotes:
-      "Python is what everyone learns to code with now. It's in data science, " +
-      "machine learning, automation — it's everywhere. But every programmer " +
-      "knows that the absolute dumbest thing you can do in Python is:",
+    titleNotes: "• everyone learns Python now · dumbest thing you can do is...",
     videoNotes: [
-      "OK. I kid. I don't love python, but I know a lot of programmers do.",
-      "So in python, we're going to look at exception handling. Our reraise " +
-        "function raises an exception. It propagates up correctly. That's " +
-        "exactly how exceptions are supposed to work.",
-      "finally_return also raises an exception.\n[pause]",
-      "But the exception is gone.",
+      "• (kidding)",
+      "• reraise() raises → propagates correctly, as expected",
+      "• finally_return() also raises · [pause]",
+      "• exception is gone",
     ],
     explanation: [
       [
@@ -87,60 +74,16 @@ const LANG_META: Record<string, LangMeta> = {
         { text: " in finally discards the pending exception", color: DIM_CLR, mono: true },
       ],
     ],
-    explanationNotes:
-      "finally always runs — even with an exception in flight. return inside " +
-      "finally discards the pending exception on its way out.\n\n" +
-      "No warning. No traceback. Your error just doesn't happen.",
-  },
-
-  rust: {
-    displayName: "Rust",
-    titleNotes:
-      "Rust is designed for memory safety. It is intended to be 'correct by " +
-      "construction' at compile time. But it's syntax can be a bit obtuse " +
-      "even to the most experienced of programmers.",
-    videoNotes: [
-      "Here, we've got a simple rust program where we define a vector, we " +
-        "borrow (or 'check out') the vector to read the data, and then we try " +
-        "to add a new value BEFORE the reader 'checks in' the vector data. A " +
-        "big memory 'no-no' to write to something someone else has checked out.",
-      "And rust is supposed to catch any memory errors at compile time, but " +
-        "this compiles fine. OK. So let's run it.",
-      "Panics. Rust lost it's compile time memory safety.",
-    ],
-    explanation: [
-      [
-        { text: "compile-time", color: "50FA7B", bold: true, mono: true },
-        { text: "  →  ", color: DIM_CLR, mono: true },
-        { text: "✓", color: "50FA7B", bold: true },
-        { text: "  (borrow checker approved)", color: DIM_CLR, mono: true },
-      ],
-      [
-        { text: "runtime", color: ACCENT, bold: true, mono: true },
-        { text: "      →  ", color: DIM_CLR, mono: true },
-        { text: "BorrowMutError", color: ACCENT, bold: true, mono: true },
-      ],
-    ],
-    explanationNotes:
-      "Rust does memory safety checks at compile time, except when you use " +
-      "RefCell. RefCell is the programmers way of telling rust 'don't worry " +
-      "about memory safety, I've got this'. But, clearly, I should have left " +
-      "the checking to the professionals.",
+    explanationNotes: "• finally always runs · return there discards exception · no warning, no traceback",
   },
 
   typescript: {
     displayName: "TypeScript",
-    titleNotes:
-      "Next we have JavaScript's big brother, TypeScript. Typescript is " +
-      "basically JavaScript with a type-checker bolted on. Its entire " +
-      "purpose is to catch mistakes before your code runs.",
+    titleNotes: "• JS's big brother · type-checker bolted on",
     videoNotes: [
-      "So we start by defining a new Type and a Function that uses that " +
-        "Type. And as expected, when I pass in an object with an extra " +
-        "property to it, TypeScript catches it. Great. That's the whole pitch.",
-      "But what happens if I assign that exact same value to a variable " +
-        "first.\n[pause]",
-      "TypeScript says that it's A-OK now. Perfect.",
+      "• bad object literal → TypeScript throws error",
+      "• same value via variable first · [pause]",
+      "• now it's A-OK",
     ],
     explanation: [
       [
@@ -157,29 +100,17 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "1", color: FN_CLR, bold: true, mono: true },
       ],
     ],
-    explanationNotes:
-      "In TypeScript, fresh object literals get strict checking, but " +
-      "variables get \"widened\"; meaning that TypeScript forgets about the " +
-      "extra property.\n\n" +
-      "Same object. Same data. Different answer depending on how you wrote it.",
+    explanationNotes: "• fresh literals: strict check · variables: widened, forgets the extra prop",
   },
 
   sql: {
     displayName: "SQL",
-    titleNotes:
-      "SQL is everybody's favorite declarative language. You don't tell it " +
-      "how to do it's job, you just tell it what job you want it to do.",
+    titleNotes: "• everybody's fave declarative language",
     videoNotes: [
-      "In this example, we start with a simple employee table with an id, a " +
-        "name, and the id of their manager.",
-      "And say we want to find every employee who is not a manager. A quick " +
-        "glance at the manager_id column says the managers are ids 1, 2 and " +
-        "3 and Dave and Eve are the ICs. It checks out.",
-      "Now what happens when we add new managers? We have to keep our list " +
-        "of manager ids updated manually. So instead of a hardcoded list, " +
-        "I'll replace it with a query that fetches the manager IDs from the " +
-        "table itself, and I should get the same answer.\n[pause]",
-      "But I don't.",
+      "• employees table",
+      "• NOT IN (1,2,3) → Dave, Eve — checks out",
+      "• swap to subquery — not scalable · [pause]",
+      "• get nothing instead",
     ],
     explanation: [
       [
@@ -197,25 +128,16 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "  (not FALSE)", color: DIM_CLR, mono: true },
       ],
     ],
-    explanationNotes:
-      "One employee, Alice, has no manager because she is the CEO. Her " +
-      "manager ID is NULL.\n\n" +
-      "And NOT IN expands to: id ≠ 1 AND id ≠ 2 AND id ≠ NULL. In SQL, " +
-      "comparing anything to NULL doesn't return false — it returns unknown. " +
-      "The WHERE clause can never be true. Nobody is returned.",
+    explanationNotes: "• comparing to NULL → UNKNOWN, not false · WHERE never true, zero rows",
   },
 
   php: {
     displayName: "PHP",
-    titleNotes:
-      "PHP powers something like 75% of the web. WordPress runs on PHP. \n\n" +
-      "Whether that's comforting or alarming, I'll leave to you.",
+    titleNotes: "• ~75% of the web · WordPress",
     videoNotes: [
-      "I'm building a PHP array: a group of key and value pairs. I have " +
-        "four entries: true, 1, 1.9, and \"1\". Four different keys.",
-      "So, I've stored all four values, let's take a look at what I've " +
-        "got.\n[pause]",
-      "One.",
+      "• 4 assignments, 4 different keys",
+      "• what got stored? · [pause]",
+      "• just one key/value pair",
     ],
     explanation: [
       [
@@ -231,26 +153,16 @@ const LANG_META: Record<string, LangMeta> = {
         { text: "  →  1",             color: DIM_CLR, mono: true },
       ],
     ],
-    explanationNotes:
-      "PHP automatically converts array keys. Booleans become integers — " +
-      "true is 1. Floats truncate — 1.9 becomes 1, not 2. Strings that look " +
-      "like numbers become those numbers — \"1\" becomes 1. All four writes " +
-      "landed on the same key. Last write wins.",
+    explanationNotes: "• bools/floats/numeric strings all cast to int · same key, last write wins",
   },
 
   terraform: {
     displayName: "Terraform",
-    titleNotes:
-      "Terraform is a DevOps tool; it lets you describe your infrastructure " +
-      "as code. Instead of clicking around in AWS console, you write a file " +
-      "that says:",
+    titleNotes: "• DevOps · infrastructure as code",
     videoNotes: [
-      "\"I want three servers, call them pluto, mars, and jupiter.\" Then " +
-        "you apply and boom, three servers created, each with a unique id.",
-      "But on second thought, I only wanted my servers named after \"real " +
-        "planets\", so let's try again with just \"mars and jupiter\" and " +
-        "we'll see how terraform handles this.\n[pause]",
-      "It wants to update two servers and destroy one.",
+      "• 3 servers: pluto, mars, jupiter → apply, all created",
+      "• only want \"real planets\" now · [pause]",
+      "• wants to update 2, destroy 1",
     ],
     explanation: [
       [
@@ -268,12 +180,7 @@ const LANG_META: Record<string, LangMeta> = {
         { text: " — cascade", color: DIM_CLR, mono: true },
       ],
     ],
-    explanationNotes:
-      "Terraform uses the position as identity, not the name. Remove " +
-      "position zero — pluto — and position one slides down. Terraform " +
-      "sees a new name at position zero: that's an update. Same for one. " +
-      "Position two no longer exists: that's a destroy.\n\n" +
-      "Rename your list; Terraform rebuilds your infrastructure.",
+    explanationNotes: "• position = identity, not name · cut pluto → rest slides down, cascades",
   },
 };
 
@@ -367,7 +274,7 @@ const titleFooter = (slide: PptxGenJS.Slide) =>
   });
 
 // Shared helper: builds the title text. EVERY is all-caps for emphasis;
-// colour stays white — the red reveal is SEVEN on the epilogue slide.
+// colour stays white — the red reveal is SIX on the epilogue slide.
 const addTitleText = (slide: PptxGenJS.Slide) =>
   slide.addText(
     "The Dumbest Thing You\nCan Do in EVERY\nProgramming\nLanguage",
@@ -390,18 +297,13 @@ jokeTitle.addText("Title Slide", {
   fontSize: titleFontSize("Title Slide"),
 });
 titleFooter(jokeTitle);
-jokeTitle.addNotes(
-  "Hello, I'm David Haye. One of the core rules of \"Lightning Talks\" is " +
-  "that these talks are not supposed to be \"Work Related\". So I'm hoping " +
-  "that you'll agree that I'm bending, but not breaking that rule by " +
-  "sharing with you"
-);
+jokeTitle.addNotes("• name · lightning talks aren't \"work related\" · bending not breaking that");
 
 const intro = pptx.addSlide();
 intro.background = { color: BG };
 addTitleText(intro);
 titleFooter(intro);
-intro.addNotes("\"The Dumbest Thing You can Do In Every Programming Language\"");
+intro.addNotes("• title reveal");
 
 // Language sections
 for (const lang of langOrder) {
@@ -453,9 +355,9 @@ const epilogue1 = pptx.addSlide();
 epilogue1.background = { color: BG };
 addTitleText(epilogue1);
 titleFooter(epilogue1);
-epilogue1.addNotes("The dumbest thing you can do in");
+epilogue1.addNotes("• \"the dumbest thing you can do in...\"");
 
-// Epilogue slide 2: same title + SEVEN overlaid over EVERY.
+// Epilogue slide 2: same title + SIX overlaid over EVERY.
 // Position matches where "EVERY" sits on line 2 (y≈25%).
 const epilogue2 = pptx.addSlide();
 epilogue2.background = { color: BG };
@@ -465,17 +367,17 @@ addTitleText(epilogue2);
 epilogue2.addText("s", {
   x: "69%", y: "60%", w: "8%", h: "14%",
   align: "left", valign: "top",
-  color: SEVEN_CLR, bold: true, fontFace: FONT,
+  color: SIX_CLR, bold: true, fontFace: FONT,
   fontSize: 80,
 });
-epilogue2.addText("SEVEN", {
+epilogue2.addText("SIX", {
   x: "56%", y: "25%", w: "30%", h: "18%",
   align: "center", valign: "middle",
-  color: SEVEN_CLR, bold: true, fontFace: FONT,
+  color: SIX_CLR, bold: true, fontFace: FONT,
   fontSize: 80,
 });
 titleFooter(epilogue2);
-epilogue2.addNotes("Seven Programming Languages");
+epilogue2.addNotes("• \"...six programming languages\" [click]");
 
 // Write
 const slideCount = 1 + langOrder.filter((l) => LANG_META[l]).length * 2 + allVideos.length + 2;

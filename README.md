@@ -5,14 +5,17 @@ reasonable-looking code, real interpreters, immediate betrayal. See
 `docs/HANDOFF.md` for the full research brief, scoring criteria, and
 candidate history. See `SCRIPT.md` for the verbatim speaker script.
 
-## The seven languages (talk order)
+## The six languages (talk order)
 
-JavaScript → TypeScript → PHP → SQL → Terraform → Rust → Python. Each has a
+JavaScript → TypeScript → PHP → SQL → Terraform → Python. Each has a
 `final/` beat sequence (3 beats; Python and SQL have 4) recorded as vhs tapes
 and stitched into `slides.pptx` by `scripts/build-slides.ts`.
 
-`go/` and `tcl/` have candidates but no `final/` — deferred speed-round
-material, not currently in the talk. `ruby/` has one candidate
+Rust was cut to fit the 5-minute slot — its videos took the longest to
+record/render of any language and it was the weakest joke of the pool.
+`rust/candidates/` is kept as a documented backlog idea; `rust/final/` was
+removed. `go/` and `tcl/` have candidates but no `final/` — deferred
+speed-round material, never in the talk. `ruby/` has one candidate
 (`reopen-integer`) kept as a documented backlog idea; it briefly had a
 `final/` beat sequence during an abandoned Rust→Ruby swap that was reverted,
 and has since been pulled back down to candidate-only.
