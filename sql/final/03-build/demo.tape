@@ -18,11 +18,20 @@ Sleep 200ms
 Type "clear"
 Enter
 Sleep 300ms
-Show
-
 Type "sqlite3 /tmp/demo-sql.db"
 Enter
 Sleep 1000ms
 Type "SELECT * FROM employees;"
 Enter
+Sleep 1000ms
+Type "SELECT name FROM employees WHERE id NOT IN (1, 2, 3);"
+Enter
+Sleep 800ms
+Show
+
+Enter
+Sleep 500ms
+Type "SELECT name FROM employees"
+Enter
+Type "WHERE id NOT IN (SELECT manager_id FROM employees);"
 Sleep 2500ms

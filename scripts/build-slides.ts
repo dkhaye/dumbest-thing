@@ -83,30 +83,34 @@ const LANG_META: Record<string, LangMeta> = {
       "• no warning, no traceback — silent data loss",
   },
 
-  ruby: {
-    displayName: "Ruby",
-    titleNotes: "• Ruby",
+  rust: {
+    displayName: "Rust",
+    titleNotes:
+      "• Rust is designed for memory safety\n" +
+      "• 'correct by construction' at compile time\n" +
+      "• syntax can be obtuse even to experienced programmers",
     videoNotes: [
-      "• reopen Integer, redefine +",
-      "• 1 + 1 — wait for it",
-      "• [click] → punchline",
+      "• vector, borrow to read, write before reader returns — memory no-no",
+      "• compiles fine — wait for it",
+      "• [click] → runtime panic",
     ],
     explanation: [
       [
-        { text: "class Integer", color: DIM_CLR, mono: true },
-        { text: "  ← Ruby lets you reopen any class", color: DIM_CLR, mono: true },
+        { text: "compile-time", color: "50FA7B", bold: true, mono: true },
+        { text: "  →  ", color: DIM_CLR, mono: true },
+        { text: "✓", color: "50FA7B", bold: true },
+        { text: "  (borrow checker approved)", color: DIM_CLR, mono: true },
       ],
       [
-        { text: "  def +",   color: FN_CLR,  bold: true, mono: true },
-        { text: "(other)  →  ", color: DIM_CLR, mono: true },
-        { text: "42",        color: ACCENT,  bold: true, mono: true },
-        { text: "   # always", color: DIM_CLR, mono: true },
+        { text: "runtime", color: ACCENT, bold: true, mono: true },
+        { text: "      →  ", color: DIM_CLR, mono: true },
+        { text: "BorrowMutError", color: ACCENT, bold: true, mono: true },
       ],
     ],
     explanationNotes:
-      "• Ruby lets you reopen any class, including built-ins\n" +
-      "• this redefines + for every integer in the process\n" +
-      "• 1 + 1 = 42. No warnings. No errors. Ships to prod.",
+      "• RefCell defers borrow checking to runtime\n" +
+      "• programmer says 'I've got this' — compiler steps back\n" +
+      "• should have left the checking to the professionals",
   },
 
   typescript: {
@@ -142,18 +146,22 @@ const LANG_META: Record<string, LangMeta> = {
     displayName: "SQL",
     titleNotes: "• everyone's fave declarative language",
     videoNotes: [
-      "• NOT IN — checking exclusion",
-      "• find all ICs — wait for it",
+      "• employees table — who are the managers?",
+      "• NOT IN hardcoded list → Dave and Eve",
+      "• NOT IN subquery — wait for it",
       "• [click] → punchline",
     ],
     explanation: [
       [
-        { text: "id NOT IN (1, 2, ", color: DIM_CLR, mono: true },
+        { text: "id ≠ 1  ", color: DIM_CLR, mono: true },
+        { text: "AND", color: ACCENT, bold: true, mono: true },
+        { text: "  id ≠ 2  ", color: DIM_CLR, mono: true },
+        { text: "AND", color: ACCENT, bold: true, mono: true },
+        { text: "  id ≠ ", color: DIM_CLR, mono: true },
         { text: "NULL", color: ACCENT, bold: true, mono: true },
-        { text: ")", color: DIM_CLR, mono: true },
       ],
       [
-        { text: "x = NULL", color: DIM_CLR, mono: true },
+        { text: "id ≠ NULL", color: DIM_CLR, mono: true },
         { text: "  →  ", color: DIM_CLR, mono: true },
         { text: "UNKNOWN", color: ACCENT, bold: true, mono: true },
         { text: "  (not FALSE)", color: DIM_CLR, mono: true },
@@ -198,7 +206,7 @@ const LANG_META: Record<string, LangMeta> = {
     titleNotes: "• Terraform",
     videoNotes: [
       "• type config, terraform apply",
-      "• remove alice — wait for it",
+      "• demote pluto — wait for it",
       "• [click] → plan shows cascade",
     ],
     explanation: [

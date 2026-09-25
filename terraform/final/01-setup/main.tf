@@ -1,5 +1,5 @@
 locals {
-  names = ["alice", "bob", "charlie"]
+  names = ["pluto", "mars", "jupiter"]
 }
 
 resource "terraform_data" "server" {

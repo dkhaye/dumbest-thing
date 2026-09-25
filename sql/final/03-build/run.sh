@@ -12,5 +12,4 @@ trap 'rm -f "$TMPDB"' EXIT
 
 sqlite3 "$TMPDB" < "$DIR/demo.sql"
 sqlite3 -header -column -nullvalue NULL "$TMPDB" \
-  "SELECT name FROM employees WHERE id NOT IN (1, 2, 3);" \
-  | sed 's/[[:space:]]*$//'
+  "SELECT name FROM employees WHERE id NOT IN (SELECT manager_id FROM employees);"

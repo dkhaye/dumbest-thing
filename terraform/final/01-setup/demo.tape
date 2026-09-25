@@ -23,7 +23,7 @@ Enter
 Sleep 200ms
 Type "locals {"
 Enter
-Type '  names = ["alice", "bob", "charlie"]'
+Type '  names = ["pluto", "mars", "jupiter"]'
 Enter
 Type "}"
 Enter

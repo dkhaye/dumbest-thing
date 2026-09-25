@@ -17,7 +17,7 @@ mkdir -p "$OUT" "$VIDEOS"
 
 # Presentation order — determines the lang-num prefix on exported video filenames.
 # Add a language here when its final/ beats are built.
-LANG_ORDER=(javascript typescript php sql terraform ruby python)
+LANG_ORDER=(javascript typescript php sql terraform rust python)
 
 for tool in asciinema vhs; do
   if ! command -v "$tool" >/dev/null 2>&1; then
