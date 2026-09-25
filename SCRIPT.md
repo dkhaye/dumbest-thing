@@ -113,11 +113,11 @@ In this example, we start with a simple employee table with an id, a name, and t
 
 And say we want to find every employee who is not a manager.  A quick glance at the manager_id column says the managers are ids 1, 2 and 3 and Dave and Eve are the ICs.  It checks out.
 
-**[Video 02 — connector: subquery version typed, cursor waiting]**
+**[Video 03 — connector: subquery version typed, cursor waiting]**
 
 Now what happens when we add new managers?  We have to keep our list of manager ids updated manually.  So instead of a hardcoded list, I'll replace it with a query that fetches the manager IDs from the table itself, and I should get the same answer.
 
-**[CLICK → Video 03 — punchline: zero rows]**
+**[CLICK → Video 04 — punchline: zero rows]**
 
 But I don't.
 
@@ -195,9 +195,9 @@ OK.  I kid.  I don't love python, but I know a lot of programmers do.
 
 So in `python`, we're going to look at exception handling.  Our `reraise` function raises an exception. It propagates up correctly. That's exactly how exceptions are supposed to work.
 
-**[Video 03 — connector: defines `finallyReturn()` with `finally: return 2`, types `finallyReturn()`, cursor waiting]**
+**[Video 03 — connector: defines `finally_return()` with `finally: return 2`, types `finally_return()`, cursor waiting]**
 
-`finallyReturn` also raises an exception.
+`finally_return` also raises an exception.
 
 *[pause]*
 

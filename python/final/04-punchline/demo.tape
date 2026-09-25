@@ -39,7 +39,7 @@ Backspace
 Type "python3"
 Enter
 Sleep 1500ms
-Type "def loud():"
+Type "def reraise():"
 Enter
 Type "    try:"
 Enter
@@ -51,12 +51,12 @@ Type "        raise"
 Enter
 Enter
 Sleep 500ms
-Type "loud()"
+Type "reraise()"
 Enter
 Sleep 800ms
 Enter
 Sleep 500ms
-Type "def silent():"
+Type "def finally_return():"
 Enter
 Type "    try:"
 Enter
@@ -68,7 +68,7 @@ Type "        return 2"
 Enter
 Enter
 Sleep 500ms
-Type "silent()"
+Type "finally_return()"
 Show
 
 Enter
