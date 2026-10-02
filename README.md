@@ -129,6 +129,9 @@ filename from the directory name, so a duplicate slug silently collides in
 
 Copyright 2026 David Haye. Licensed under the [Apache License, Version 2.0](LICENSE).
 
+This is a finished project. See [CONTRIBUTING.md](CONTRIBUTING.md) (no contributions
+expected), [SECURITY.md](SECURITY.md), and the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## CI
 
 - [`verify.yml`](.github/workflows/verify.yml) — runs `make verify` and `shellcheck` on every `run.sh`, on push to `main` and on every PR.
