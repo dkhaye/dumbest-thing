@@ -125,6 +125,10 @@ filename from the directory name, so a duplicate slug silently collides in
 - The behavior is current, documented or spec-defensible, and reproduced locally.
 - It reveals something characteristic of *this* language, not generic programmer error.
 
+## License
+
+Copyright 2026 David Haye. Licensed under the [Apache License, Version 2.0](LICENSE).
+
 ## CI
 
 - [`verify.yml`](.github/workflows/verify.yml) — runs `make verify` and `shellcheck` on every `run.sh`, on push to `main` and on every PR.
