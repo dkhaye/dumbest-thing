@@ -1,4 +1,6 @@
-# Python
+# Upython
 
-This folder holds Python candidates for the "dumbest thing" lightning talk.
-See [docs/HANDOFF.md](../docs/HANDOFF.md) for context on selection criteria and tone.
+Upython demos for [The Dumbest Thing You Can Do in Every Programming Language](../README.md).
+
+- `candidates/` — verified reproducers, each with its command, output, explanation, and sources.
+- `final/` — the beats used in the talk.

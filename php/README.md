@@ -1,4 +1,6 @@
 # PHP
 
-Candidate reproducers for the "dumbest thing" talk. See
-[docs/HANDOFF.md](../docs/HANDOFF.md) for selection criteria and context.
+PHP demos for [The Dumbest Thing You Can Do in Every Programming Language](../README.md).
+
+- `candidates/` — verified reproducers, each with its command, output, explanation, and sources.
+- `final/` — the beats used in the talk.

@@ -1,6 +1,6 @@
 # excess property check disappears through a variable
 
-**Status:** leading candidate, strong final slot despite not being a REPL demo
+**Status:** used in the talk — see `typescript/final/`.
 
 ## Command
 
@@ -84,6 +84,5 @@ call.
 
 - ~25-30 seconds: run `error.ts`, point at the excess-property error; run
   `pass.ts` on the "same" object, point at the silent pass.
-- Compiler before/after, not a REPL — matches the HANDOFF guidance that
-  TypeScript is strongest shown this way.
+- Compiler before/after, not a REPL — TypeScript is strongest shown this way.
 - Punchline: "I didn't fix the typo. I just gave it a name first."

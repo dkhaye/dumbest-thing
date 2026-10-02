@@ -1,6 +1,6 @@
 # reopen Integer and replace addition
 
-**Status:** leading candidate — fast palate cleanser, not central beat
+**Status:** not used — fast palate cleanser, briefly swapped in for Rust and then reverted. Verified and kept as backlog.
 
 ## Command
 
@@ -35,9 +35,8 @@ process returns `42` regardless of operands. The code is syntactically
 ordinary — a `class` block redefining a method — and Ruby accepts it without
 any special ceremony.
 
-Per the production handoff: this one is somewhat deliberate rather than
-accidental. It doesn't need much setup or a subtle mechanism to explain, so
-it works best as a fast palate cleanser between deeper examples rather than
+This one is somewhat deliberate rather than accidental. It doesn't need much
+setup or a subtle mechanism to explain, so it works best as a fast palate cleanser between deeper examples rather than
 the intellectual center of the talk.
 
 ## Documentation

@@ -1,6 +1,6 @@
 # typed nil interface is not nil
 
-**Status:** leading candidate, likely final slot
+**Status:** not used — strong candidate, deferred as speed-round material. Verified and kept as backlog.
 
 ## Command
 

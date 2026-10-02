@@ -1,6 +1,6 @@
 # NOT IN with NULL eliminates expected rows
 
-**Status:** leading candidate, strong contender if the talk needs more operational substance
+**Status:** used in the talk — see `sql/final/`.
 
 ## Command
 

@@ -1,7 +1,6 @@
 # Python — `finally: return` silently discards the exception
 
-**Status:** leading candidate — replaces mutable-default-arg as the "real
-thing" beat in the Python bit (brew install joke -> spacebar joke -> this)
+**Status:** used in the talk — see `python/final/`. Replaced `mutable-default-arg` as the "real thing" beat.
 
 ## Command
 

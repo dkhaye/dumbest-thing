@@ -1,6 +1,6 @@
 # array key collision
 
-**Status:** leading candidate, likely final slot
+**Status:** used in the talk — see `php/final/`.
 
 ## Command
 

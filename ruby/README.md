@@ -1,5 +1,8 @@
 # Ruby
 
-See [docs/HANDOFF.md](../docs/HANDOFF.md) for context on candidate selection and talk framing.
+Ruby candidates for [The Dumbest Thing You Can Do in Every Programming Language](../README.md).
+None of them made the talk; they are verified reproducers kept as a backlog.
 
-This project pins to ruby 3.1.2 via rbenv (`~/.rbenv/versions/3.1.2/bin/ruby`) — not the system ruby 2.6.10 default that `ruby` resolves to on PATH via rbenv shims.
+The candidate's `run.sh` prefers rbenv's Ruby 3.1.2 (`~/.rbenv/versions/3.1.2/bin/ruby`)
+if present, and otherwise falls back to whatever `ruby` is on `PATH`. The system
+Ruby that rbenv shims can resolve to (2.6.10) is too old.

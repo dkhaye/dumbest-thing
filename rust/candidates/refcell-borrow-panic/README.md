@@ -1,6 +1,6 @@
 # Rust — RefCell moves borrow checking to runtime, and it panics
 
-**Status:** leading candidate — chosen over `mem::forget` (see rationale below)
+**Status:** cut from the talk for time (slowest videos to record, weakest joke of the pool). Chosen over `mem::forget` (see rationale below). Verified and kept as backlog.
 
 ## Command
 
@@ -51,14 +51,12 @@ error, in code a reviewer would have no reason to flag.
 
 ## Why RefCell over `mem::forget`
 
-`docs/HANDOFF.md` posed this as an open choice between two "safe but
-philosophically alarming" Rust behaviors: `RefCell` runtime panics, or
-`std::mem::forget` silently skipping a value's destructor (a safe resource
+The two obvious "safe but philosophically alarming" Rust behaviors were `RefCell` runtime
+panics, or `std::mem::forget` silently skipping a value's destructor (a safe resource
 leak). Tested both. `mem::forget`'s reveal is an *absence* — the audience
 has to notice a `drop` message that never printed, which is a much weaker
 visual than an immediate, explicit panic with the literal string "already
-mutably borrowed" on screen. RefCell wins on the doc's own "surprising on
-sight" criterion.
+mutably borrowed" on screen. RefCell wins on the "surprising on sight" criterion.
 
 ## Documentation
 

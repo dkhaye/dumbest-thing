@@ -1,8 +1,6 @@
 # mutable default argument
 
-**Status:** backup — displaced by `finally-swallows-exception` as the "real
-thing" beat (too famous a Python gotcha; part of the room will see the
-punchline coming). Still verified and kept as a fallback.
+**Status:** backup, not used — displaced by `finally-swallows-exception` (too famous a gotcha; part of the room will see the punchline coming). Still verified and kept as a fallback.
 
 ## Command
 

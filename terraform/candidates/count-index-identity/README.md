@@ -1,7 +1,6 @@
 # Terraform — removing the first item in a `count` list rewrites everyone after it
 
-**Status:** leading candidate — resolves the doc's open Terraform question,
-beats both drafts (`for_each` key rename, map-to-object lossy conversion)
+**Status:** used in the talk — see `terraform/final/`.
 
 ## Command
 

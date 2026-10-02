@@ -1,6 +1,6 @@
 # Tcl — a variable name can be a scalar or an array, but not both
 
-**Status:** leading candidate — resolves the doc's open Tcl question
+**Status:** not used — resolves the brief's open Tcl question, but never made the talk. Verified and kept as backlog.
 
 ## Command
 
@@ -39,7 +39,7 @@ thought — but Tcl refuses it outright: you cannot collapse an array back
 into a scalar by assignment. The error only appears at the exact line that
 tries to overwrite the array, with no warning anywhere upstream.
 
-This is the sharper version of the pair explored in `docs/HANDOFF.md`: the
+This is the sharper version of an earlier draft: the
 original draft demonstrated the same collision by explicitly `unset`ting a
 variable first, which reads as contrived stage-managing. Here, the array is
 just a normal, plausible config table, and the betrayal is a single

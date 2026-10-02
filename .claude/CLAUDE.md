@@ -1,7 +1,6 @@
 # dumbest-thing
 
-Repo layout, rules, and CI are documented in `README.md` and
-`docs/HANDOFF.md` — read those first.
+Repo layout, rules, and CI are documented in `README.md` — read that first.
 
 If a file `.local/CONTEXT.md` exists in this repo, read it at the start
 of the session. It holds session-to-session handoff notes (in-progress

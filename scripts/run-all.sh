@@ -20,7 +20,7 @@ indent() {
 for lang_dir in "$ROOT"/*/; do
   lang="$(basename "$lang_dir")"
   case "$lang" in
-    scripts|captures|docs) continue ;;
+    scripts|captures) continue ;;
   esac
 
   if [ "$MODE" = "final" ]; then
